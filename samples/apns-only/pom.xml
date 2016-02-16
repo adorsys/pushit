@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.adorsys.pushit</groupId>
+  <artifactId>sample-apns-only</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <source.level>1.7</source.level>
+
+    <mainClass>de.adorsys.pushit.sample_apns_only.Main</mainClass>
+
+    <!-- Needed by pushy, see also https://github.com/relayrides/pushy#system-requirements and http://netty.io/wiki/forked-tomcat-native.html -->
+    <!-- Configure the os-maven-plugin extension to expand the classifier on -->
+    <!-- Fedora-"like" systems. -->
+    <os.detection.classifierWithLikes>fedora</os.detection.classifierWithLikes>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>de.adorsys.pushit</groupId>
+      <artifactId>pushit</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.relayrides</groupId>
+      <artifactId>pushy</artifactId>
+      <version>0.5</version>
+    </dependency>
+
+    <!-- Needed by pushy, see also https://github.com/relayrides/pushy#system-requirements and http://netty.io/wiki/forked-tomcat-native.html -->
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-tcnative</artifactId>
+      <version>1.1.33.Fork9</version>
+      <classifier>${os.detected.classifier}</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.6</version>
+    </dependency>
+    <dependency>
+      <groupId>com.typesafe</groupId>
+      <artifactId>config</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <extensions>
+      <!-- Needed by pushy, see also https://github.com/relayrides/pushy#system-requirements and http://netty.io/wiki/forked-tomcat-native.html -->
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.4.0.Final</version>
+      </extension>
+    </extensions>
+
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>${mainClass}</mainClass>
+          <executable>maven</executable>
+          <!-- optional -->
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>${mainClass}</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
