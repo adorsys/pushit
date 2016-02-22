@@ -9,11 +9,6 @@
 
   <properties>
     <source.level>1.7</source.level>
-
-    <!-- Needed by pushy, see also https://github.com/relayrides/pushy#system-requirements and http://netty.io/wiki/forked-tomcat-native.html -->
-    <!-- Configure the os-maven-plugin extension to expand the classifier on -->
-    <!-- Fedora-"like" systems. -->
-    <os.detection.classifierWithLikes>fedora</os.detection.classifierWithLikes>
   </properties>
 
   <distributionManagement>
@@ -39,15 +34,6 @@
       <groupId>com.relayrides</groupId>
       <artifactId>pushy</artifactId>
       <version>0.5</version>
-      <optional>true</optional>
-    </dependency>
-
-    <!-- Needed by pushy, see also https://github.com/relayrides/pushy#system-requirements and http://netty.io/wiki/forked-tomcat-native.html -->
-    <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty-tcnative</artifactId>
-      <version>1.1.33.Fork9</version>
-      <classifier>${os.detected.classifier}</classifier>
       <optional>true</optional>
     </dependency>
 
@@ -82,15 +68,6 @@
         </configuration>
       </plugin>
     </plugins>
-
-    <extensions>
-      <!-- Needed by pushy, see also https://github.com/relayrides/pushy#system-requirements and http://netty.io/wiki/forked-tomcat-native.html -->
-      <extension>
-        <groupId>kr.motd.maven</groupId>
-        <artifactId>os-maven-plugin</artifactId>
-        <version>1.4.0.Final</version>
-      </extension>
-    </extensions>
   </build>
 
 </project>
