@@ -28,7 +28,7 @@
     <dependency>
       <groupId>com.relayrides</groupId>
       <artifactId>pushy</artifactId>
-      <version>0.5</version>
+      <version>0.5.2</version>
     </dependency>
 
     <!-- Needed by pushy, see also https://github.com/relayrides/pushy#system-requirements and http://netty.io/wiki/forked-tomcat-native.html -->

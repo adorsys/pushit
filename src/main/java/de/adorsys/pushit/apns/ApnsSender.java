@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.SSLException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -32,6 +34,10 @@ public class ApnsSender {
 			throw new RuntimeException(e);
 		} catch (NoClassDefFoundError e) {
 			throw new RuntimeException("Classes required by APNS backend of pushit not found", e);
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
