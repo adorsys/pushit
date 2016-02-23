@@ -2,14 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>de.adorsys.pushit</groupId>
-  <artifactId>pushit</artifactId>
-  <version>0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
 
-  <properties>
-    <source.level>1.7</source.level>
-  </properties>
+  <groupId>de.adorsys.pushit</groupId>
+  <artifactId>parent</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
   <distributionManagement>
     <repository>
@@ -23,51 +20,17 @@
     </snapshotRepository>
   </distributionManagement>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.google.gcm</groupId>
-      <artifactId>gcm-server</artifactId>
-      <version>1.0.0</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>com.notnoop.apns</groupId>
-      <artifactId>apns</artifactId>
-      <version>1.0.0.Beta6</version>
-      <optional>true</optional>
-    </dependency>
+  <modules>
+    <module>bom</module>
+    <module>pushit</module>
+  </modules>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>1.7.6</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.typesafe</groupId>
-      <artifactId>config</artifactId>
-      <version>1.2.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <source>${source.level}</source>
-          <target>${source.level}</target>
-          <showDeprecation>true</showDeprecation>
-          <showWarnings>true</showWarnings>
-          <compilerArgs>
-            <arg>-Xlint</arg>
-          </compilerArgs>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
+  <profiles>
+    <profile>
+      <id>samples</id>
+      <modules>
+        <module>samples</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>

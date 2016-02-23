@@ -9,13 +9,22 @@
     <version>0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>sample-parent</artifactId>
+  <artifactId>bom</artifactId>
   <packaging>pom</packaging>
 
-  <modules>
-    <module>apns-only</module>
-    <module>gcm-only</module>
-    <module>java-apns-jboss</module>
-  </modules>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.gcm</groupId>
+        <artifactId>gcm-server</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.notnoop.apns</groupId>
+        <artifactId>apns</artifactId>
+        <version>1.0.0.Beta6</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
 </project>

@@ -12,17 +12,28 @@
     <mainClass>de.adorsys.pushit.sample_apns_only.Main</mainClass>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>de.adorsys.pushit</groupId>
+        <artifactId>bom</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>de.adorsys.pushit</groupId>
       <artifactId>pushit</artifactId>
-      <version>0.1-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.notnoop.apns</groupId>
       <artifactId>apns</artifactId>
-      <version>1.0.0.Beta6</version>
     </dependency>
 
     <dependency>
