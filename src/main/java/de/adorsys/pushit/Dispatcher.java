@@ -1,6 +1,5 @@
 package de.adorsys.pushit;
 
-import com.relayrides.pushy.apns.util.SimpleApnsPushNotification;
 import de.adorsys.pushit.apns.ApnsSender;
 import de.adorsys.pushit.gcm.GcmSender;
 
@@ -20,7 +19,7 @@ public class Dispatcher {
 	public void send(MessageBuilder messageBuilder, Receiver receiver) {
 		if (apnsSender != null) {
 			for (String apnsToken : receiver.getApnsTokens()) {
-				final SimpleApnsPushNotification apnsMessage = messageBuilder.buildApnsMessage(apnsSender, apnsToken);
+				String apnsMessage = messageBuilder.buildApnsMessage(apnsSender, apnsToken);
 				apnsSender.send(apnsMessage, apnsToken);
 			}
 		}

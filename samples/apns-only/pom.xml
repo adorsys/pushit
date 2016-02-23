@@ -9,13 +9,7 @@
 
   <properties>
     <source.level>1.7</source.level>
-
     <mainClass>de.adorsys.pushit.sample_apns_only.Main</mainClass>
-
-    <!-- Needed by pushy, see also https://github.com/relayrides/pushy#system-requirements and http://netty.io/wiki/forked-tomcat-native.html -->
-    <!-- Configure the os-maven-plugin extension to expand the classifier on -->
-    <!-- Fedora-"like" systems. -->
-    <os.detection.classifierWithLikes>fedora</os.detection.classifierWithLikes>
   </properties>
 
   <dependencies>
@@ -26,17 +20,9 @@
     </dependency>
 
     <dependency>
-      <groupId>com.relayrides</groupId>
-      <artifactId>pushy</artifactId>
-      <version>0.5.2</version>
-    </dependency>
-
-    <!-- Needed by pushy, see also https://github.com/relayrides/pushy#system-requirements and http://netty.io/wiki/forked-tomcat-native.html -->
-    <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty-tcnative</artifactId>
-      <version>1.1.33.Fork9</version>
-      <classifier>${os.detected.classifier}</classifier>
+      <groupId>com.notnoop.apns</groupId>
+      <artifactId>apns</artifactId>
+      <version>1.0.0.Beta6</version>
     </dependency>
 
     <dependency>
@@ -52,15 +38,6 @@
   </dependencies>
 
   <build>
-    <extensions>
-      <!-- Needed by pushy, see also https://github.com/relayrides/pushy#system-requirements and http://netty.io/wiki/forked-tomcat-native.html -->
-      <extension>
-        <groupId>kr.motd.maven</groupId>
-        <artifactId>os-maven-plugin</artifactId>
-        <version>1.4.0.Final</version>
-      </extension>
-    </extensions>
-
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
