@@ -15,6 +15,11 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>de.adorsys.pushit</groupId>
+        <artifactId>pushit</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
         <groupId>com.google.gcm</groupId>
         <artifactId>gcm-server</artifactId>
         <version>1.0.0</version>
