@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.adorsys.pushit</groupId>
+  <artifactId>sample-java-apns-jboss</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <properties>
+    <source.level>1.7</source.level>
+    <jboss-as.username>admin</jboss-as.username>
+    <jboss-as.password>admin</jboss-as.password>
+    <jboss-as.hostname>docker</jboss-as.hostname>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.notnoop.apns</groupId>
+      <artifactId>apns</artifactId>
+      <version>1.0.0.Beta6</version>
+    </dependency>
+
+    <!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss EAP 6 -->
+    <dependency>
+      <groupId>org.jboss.spec.javax.ws.rs</groupId>
+      <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+      <version>1.0.1.Final</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.typesafe</groupId>
+      <artifactId>config</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jboss.as.plugins</groupId>
+        <artifactId>jboss-as-maven-plugin</artifactId>
+        <version>7.7.Final</version>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

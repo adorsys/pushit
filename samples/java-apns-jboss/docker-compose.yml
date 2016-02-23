@@ -1,0 +1,8 @@
+java_apns_jboss:
+  build: jboss
+  container_name: "java_apns_jboss"
+  ports:
+    - "8080:8080" # jboss http
+    - "8787:8787" # jboss debug
+    - "9990:9990" # jboss mgmt http
+    - "9999:9999" # jboss mgmt native
