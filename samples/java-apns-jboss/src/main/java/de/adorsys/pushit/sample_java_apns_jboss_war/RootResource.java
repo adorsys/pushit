@@ -21,13 +21,13 @@ public class RootResource {
 	}
 
 	private static final Config conf = ConfigFactory.load();
-	private static final String keyFileName = conf.getString("apns.keyFile");
+	private static final String keyFilename = conf.getString("apns.keyFile");
 	private static final String keyPassphrase = conf.getString("apns.keyPassphrase");
 	private static final String topic = conf.getString("apns.topic");
 	private static final String deviceToken = conf.getString("apns.deviceToken");
 
 	private void sendMessage() {
-		ApnsService service = APNS.newService().withCert(keyFileName, keyPassphrase).withProductionDestination().build();
+		ApnsService service = APNS.newService().withCert(keyFilename, keyPassphrase).withProductionDestination().build();
 
 		String payload = APNS.newPayload().alertBody("Hi from sample_java_apns_jboss").build();
 		service.push(deviceToken, payload);

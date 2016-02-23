@@ -13,14 +13,14 @@ import de.adorsys.pushit.apns.ApnsSender;
 public class Main {
 
 	private static final Config conf = ConfigFactory.load();
-	private static final String keyFileName = conf.getString("apns.keyFile");
+	private static final String keyFilename = conf.getString("apns.keyFile");
 	private static final String keyPassphrase = conf.getString("apns.keyPassphrase");
 	private static final String deviceToken = conf.getString("apns.deviceToken");
 
 	public static void main(String[] args) throws InterruptedException {
 		System.out.println("Hello");
 
-		ApnsSender apnsSender = new ApnsSender(keyFileName, keyPassphrase);
+		ApnsSender apnsSender = new ApnsSender(keyFilename, keyPassphrase);
 		Dispatcher dispatcher = new Dispatcher.Builder().apnsSender(apnsSender).build();
 
 		MessageBuilder.SimpleTextMessageBuilder messageBuilder = new MessageBuilder.SimpleTextMessageBuilder("Hi from pushit");

@@ -13,7 +13,7 @@ import java.io.File;
 public class TestCommonMessageMain {
 
 	private static final Config conf = ConfigFactory.load();
-	private static final String keyFileName = conf.getString("apns.keyFile");
+	private static final String keyFilename = conf.getString("apns.keyFile");
 	private static final String keyPassphrase = conf.getString("apns.keyPassphrase");
 	private static final String deviceToken = conf.getString("apns.deviceToken");
 	private static final String apiKey = conf.getString("gcm.apiKey");
@@ -21,7 +21,7 @@ public class TestCommonMessageMain {
 
 	public static void main(String[] args) {
 
-		ApnsSender apnsSender = new ApnsSender(keyFileName, keyPassphrase);
+		ApnsSender apnsSender = new ApnsSender(keyFilename, keyPassphrase);
 
 		GcmSender gcmSender = new GcmSender(apiKey);
 
