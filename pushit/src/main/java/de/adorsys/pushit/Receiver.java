@@ -26,6 +26,15 @@ public class Receiver {
 		return gcmTokens;
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder(this.getClass().getSimpleName());
+		sb.append("{");
+		sb.append("apnsTokens=").append(apnsTokens);
+		sb.append(", gcmTokens=").append(gcmTokens);
+		sb.append("}");
+		return sb.toString();
+	}
+
 	public static class Builder {
 		private final List<String> apnsTokens;
 		private final List<String> gcmTokens;
