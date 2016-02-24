@@ -5,8 +5,6 @@ import com.typesafe.config.ConfigFactory;
 import de.adorsys.pushit.apns.ApnsSender;
 import de.adorsys.pushit.gcm.GcmSender;
 
-import java.io.File;
-
 /**
  * @author Christoph Dietze
  */
@@ -27,7 +25,7 @@ public class TestCommonMessageMain {
 
 		Dispatcher dispatcher = new Dispatcher.Builder().apnsSender(apnsSender).gcmSender(gcmSender).build();
 
-		MessageBuilder.SimpleTextMessageBuilder messageBuilder = new MessageBuilder.SimpleTextMessageBuilder("Hi from pushit");
+		MessageBuilder.SimpleText messageBuilder = new MessageBuilder.SimpleText("Hi from pushit");
 
 		Receiver receiver = new Receiver.Builder().addApnsToken(deviceToken).addGcmToken(registrationId).build();
 

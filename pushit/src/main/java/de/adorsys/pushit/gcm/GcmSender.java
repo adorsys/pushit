@@ -1,12 +1,14 @@
 package de.adorsys.pushit.gcm;
 
 import com.google.android.gcm.server.Message;
-import com.google.android.gcm.server.Result;
+import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Sender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * @author Christoph Dietze
@@ -19,7 +21,11 @@ public class GcmSender {
 
 	public GcmSender(String apiKey) {
 		this.apiKey = apiKey;
-		sender = new Sender(apiKey);
+		try {
+			sender = new Sender(apiKey);
+		} catch (NoClassDefFoundError e) {
+			throw new RuntimeException("Classes required by GCM implementation of pushit not found, did you include the required dependency?", e);
+		}
 	}
 
 	/** @return the low-level GCM {@link com.google.android.gcm.server.Sender}. */
@@ -27,11 +33,10 @@ public class GcmSender {
 		return sender;
 	}
 
-	public void send(Message message, String gcmToken) {
-		int numOfRetries = 0;
+	public void send(Message message, Collection<String> gcmTokens) {
 		try {
 			log.info("Sending: {}", message);
-			Result result = sender.send(message, gcmToken, numOfRetries);
+			MulticastResult result = sender.sendNoRetry(message, new ArrayList<>(gcmTokens));
 			log.info("Result: {}", result);
 		} catch (IOException e) {
 			throw new RuntimeException(e);

@@ -22,7 +22,7 @@ public class Main {
 		GcmSender gcmSender = new GcmSender(apiKey);
 		Dispatcher dispatcher = new Dispatcher.Builder().gcmSender(gcmSender).build();
 
-		MessageBuilder.SimpleTextMessageBuilder messageBuilder = new MessageBuilder.SimpleTextMessageBuilder("Hi from pushit");
+		MessageBuilder.SimpleText messageBuilder = new MessageBuilder.SimpleText("Hi from pushit");
 
 		Receiver receiver = new Receiver.Builder().addGcmToken(registrationId).build();
 		dispatcher.send(messageBuilder, receiver);

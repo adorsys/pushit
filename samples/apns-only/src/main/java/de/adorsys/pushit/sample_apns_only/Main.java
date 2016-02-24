@@ -23,7 +23,7 @@ public class Main {
 		ApnsSender apnsSender = new ApnsSender(keyFilename, keyPassphrase);
 		Dispatcher dispatcher = new Dispatcher.Builder().apnsSender(apnsSender).build();
 
-		MessageBuilder.SimpleTextMessageBuilder messageBuilder = new MessageBuilder.SimpleTextMessageBuilder("Hi from pushit");
+		MessageBuilder.SimpleText messageBuilder = new MessageBuilder.SimpleText("Hi from pushit");
 
 		Receiver receiver = new Receiver.Builder().addApnsToken(deviceToken).build();
 		dispatcher.send(messageBuilder, receiver);

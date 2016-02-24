@@ -8,13 +8,13 @@ import de.adorsys.pushit.gcm.GcmSender;
 /**
  * @author Christoph Dietze
  */
-public interface MessageBuilder {
+public interface BulkMessageBuilder {
 
-	String buildApnsMessage(ApnsSender sender, String apnsToken);
+	String buildApnsMessage(ApnsSender sender);
 
-	com.google.android.gcm.server.Message buildGcmMessage(GcmSender sender, String gcmToken);
+	Message buildGcmMessage(GcmSender sender);
 
-	class SimpleText implements MessageBuilder {
+	class SimpleText implements BulkMessageBuilder {
 
 		private final String text;
 
@@ -23,12 +23,12 @@ public interface MessageBuilder {
 		}
 
 		@Override
-		public String buildApnsMessage(ApnsSender sender, String apnsToken) {
+		public String buildApnsMessage(ApnsSender sender) {
 			return APNS.newPayload().alertBody(text).build();
 		}
 
 		@Override
-		public Message buildGcmMessage(GcmSender sender, String gcmToken) {
+		public Message buildGcmMessage(GcmSender sender) {
 			return new Message.Builder().addData("message", text).build();
 		}
 	}

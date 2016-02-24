@@ -5,6 +5,8 @@ import com.notnoop.apns.ApnsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collection;
+
 /**
  * @author Christoph Dietze
  */
@@ -17,12 +19,12 @@ public class ApnsSender {
 		try {
 			apnsService = APNS.newService().withCert(keyFilename, keyPassphrase).withProductionDestination().build();
 		} catch (NoClassDefFoundError e) {
-			throw new RuntimeException("Classes required by APNS backend of pushit not found", e);
+			throw new RuntimeException("Classes required by APNS implementation of pushit not found, did you include the required dependency?", e);
 		}
 	}
 
-	public void send(String payload, String apnsToken) {
-		apnsService.push(apnsToken, payload);
+	public void send(String payload, Collection<String> apnsTokens) {
+		apnsService.push(apnsTokens, payload);
 	}
 
 	/** @return The low-level instance of java-apns' {@link ApnsService}. */
