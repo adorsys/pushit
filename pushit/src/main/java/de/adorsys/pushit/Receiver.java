@@ -1,6 +1,7 @@
 package de.adorsys.pushit;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,8 +45,18 @@ public class Receiver {
 			return this;
 		}
 
+		public Builder addApnsTokens(Collection<String> apnsTokens) {
+			this.apnsTokens.addAll(apnsTokens);
+			return this;
+		}
+
 		public Builder addGcmToken(String gcmToken) {
 			gcmTokens.add(gcmToken);
+			return this;
+		}
+
+		public Builder addGcmTokens(Collection<String> gcmTokens) {
+			this.gcmTokens.addAll(gcmTokens);
 			return this;
 		}
 
