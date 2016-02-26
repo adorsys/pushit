@@ -24,7 +24,8 @@ public class GcmSender {
 		try {
 			sender = new Sender(apiKey);
 		} catch (NoClassDefFoundError e) {
-			throw new RuntimeException("Classes required by GCM implementation of pushit not found, did you include the required dependency?", e);
+			throw new RuntimeException(
+					"Classes required by GCM implementation of pushit not found, did you include the required dependency?", e);
 		}
 	}
 
@@ -35,9 +36,9 @@ public class GcmSender {
 
 	public void send(Message message, Collection<String> gcmTokens) {
 		try {
-			log.info("Sending: {}", message);
+			log.debug("Sending: {} to {}", message, gcmTokens);
 			MulticastResult result = sender.sendNoRetry(message, new ArrayList<>(gcmTokens));
-			log.info("Result: {}", result);
+			log.debug("Result: {}", result);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
