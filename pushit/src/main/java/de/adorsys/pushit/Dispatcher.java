@@ -3,8 +3,6 @@ package de.adorsys.pushit;
 import de.adorsys.pushit.apns.ApnsSender;
 import de.adorsys.pushit.gcm.GcmSender;
 
-import java.util.Collections;
-
 /**
  * @author Christoph Dietze
  */
@@ -22,13 +20,13 @@ public class Dispatcher {
 		if (apnsSender != null) {
 			for (String apnsToken : receiver.getApnsTokens()) {
 				String apnsMessage = messageBuilder.buildApnsMessage(apnsSender, apnsToken);
-				apnsSender.send(apnsMessage, Collections.singleton(apnsToken));
+				apnsSender.send(apnsMessage, apnsToken);
 			}
 		}
 		if (gcmSender != null) {
 			for (String gcmToken : receiver.getGcmTokens()) {
 				com.google.android.gcm.server.Message message = messageBuilder.buildGcmMessage(gcmSender, gcmToken);
-				gcmSender.send(message, Collections.singleton(gcmToken));
+				gcmSender.send(message, gcmToken);
 			}
 		}
 	}
@@ -36,11 +34,11 @@ public class Dispatcher {
 	public void bulkSend(BulkMessageBuilder messageBuilder, Receiver receiver) {
 		if (apnsSender != null) {
 			String apnsMessage = messageBuilder.buildApnsMessage(apnsSender);
-			apnsSender.send(apnsMessage, receiver.getApnsTokens());
+			apnsSender.bulkSend(apnsMessage, receiver.getApnsTokens());
 		}
 		if (gcmSender != null) {
 			com.google.android.gcm.server.Message message = messageBuilder.buildGcmMessage(gcmSender);
-			gcmSender.send(message, receiver.getGcmTokens());
+			gcmSender.bulkSend(message, receiver.getGcmTokens());
 		}
 	}
 

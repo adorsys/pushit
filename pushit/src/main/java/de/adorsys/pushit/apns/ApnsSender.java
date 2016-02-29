@@ -29,9 +29,13 @@ public class ApnsSender {
 		return apnsService;
 	}
 
-	public void send(String payload, Collection<String> apnsTokens) {
+	public void send(String payload, String apnsToken) {
+		log.debug("Sending: {} to {}", payload, apnsToken);
+		apnsService.push(apnsToken, payload);
+	}
+
+	public void bulkSend(String payload, Collection<String> apnsTokens) {
 		log.debug("Sending: {} to {}", payload, apnsTokens);
 		apnsService.push(apnsTokens, payload);
 	}
-
 }

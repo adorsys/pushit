@@ -2,6 +2,7 @@ package de.adorsys.pushit.gcm;
 
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
+import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,17 @@ public class GcmSender {
 		return sender;
 	}
 
-	public void send(Message message, Collection<String> gcmTokens) {
+	public void send(Message message, String gcmToken) {
+		try {
+			log.debug("Sending: {} to {}", message, gcmToken);
+			Result result = sender.sendNoRetry(message, gcmToken);
+			log.debug("Result: {}", result);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void bulkSend(Message message, Collection<String> gcmTokens) {
 		try {
 			log.debug("Sending: {} to {}", message, gcmTokens);
 			MulticastResult result = sender.sendNoRetry(message, new ArrayList<>(gcmTokens));
