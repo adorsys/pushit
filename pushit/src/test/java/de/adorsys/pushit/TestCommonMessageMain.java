@@ -25,7 +25,7 @@ public class TestCommonMessageMain {
 
 		Dispatcher dispatcher = new Dispatcher.Builder().apnsSender(apnsSender).gcmSender(gcmSender).build();
 
-		MessageBuilder.SimpleText messageBuilder = new MessageBuilder.SimpleText("Hi from pushit");
+		PersonalizedMessageBuilder.SimpleText messageBuilder = new PersonalizedMessageBuilder.SimpleText("Hi from pushit");
 
 		Receiver receiver = new Receiver.Builder().addApnsToken(deviceToken).addGcmToken(registrationId).build();
 

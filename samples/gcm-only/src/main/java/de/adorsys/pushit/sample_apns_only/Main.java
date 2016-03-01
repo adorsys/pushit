@@ -3,7 +3,7 @@ package de.adorsys.pushit.sample_apns_only;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import de.adorsys.pushit.Dispatcher;
-import de.adorsys.pushit.MessageBuilder;
+import de.adorsys.pushit.PersonalizedMessageBuilder;
 import de.adorsys.pushit.Receiver;
 import de.adorsys.pushit.gcm.GcmSender;
 
@@ -22,7 +22,7 @@ public class Main {
 		GcmSender gcmSender = new GcmSender(apiKey);
 		Dispatcher dispatcher = new Dispatcher.Builder().gcmSender(gcmSender).build();
 
-		MessageBuilder.SimpleText messageBuilder = new MessageBuilder.SimpleText("Hi from pushit");
+		PersonalizedMessageBuilder.SimpleText messageBuilder = new PersonalizedMessageBuilder.SimpleText("Hi from pushit");
 
 		Receiver receiver = new Receiver.Builder().addGcmToken(registrationId).build();
 		dispatcher.send(messageBuilder, receiver);
