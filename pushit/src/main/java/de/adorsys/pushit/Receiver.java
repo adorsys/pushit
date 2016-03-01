@@ -26,6 +26,7 @@ public class Receiver {
 		return gcmTokens;
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder(this.getClass().getSimpleName());
 		sb.append("{");

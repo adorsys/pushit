@@ -1,6 +1,7 @@
 package de.adorsys.pushit;
 
 import de.adorsys.pushit.apns.ApnsSender;
+import de.adorsys.pushit.gcm.GcmMessage;
 import de.adorsys.pushit.gcm.GcmSender;
 
 /**
@@ -20,5 +21,5 @@ public interface PersonalizedMessage {
 	/**
 	 * @return the message to be sent via GCM or null if not supported.
 	 */
-	com.google.android.gcm.server.Message gcmMessage(GcmSender sender, String gcmToken);
+	GcmMessage gcmMessage(GcmSender sender, String gcmToken);
 }

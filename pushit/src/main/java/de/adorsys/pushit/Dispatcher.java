@@ -1,6 +1,7 @@
 package de.adorsys.pushit;
 
 import de.adorsys.pushit.apns.ApnsSender;
+import de.adorsys.pushit.gcm.GcmMessage;
 import de.adorsys.pushit.gcm.GcmSender;
 
 /**
@@ -25,7 +26,7 @@ public class Dispatcher {
 		}
 		if (gcmSender != null) {
 			for (String gcmToken : receiver.getGcmTokens()) {
-				com.google.android.gcm.server.Message gcmMessage = message.gcmMessage(gcmSender);
+				GcmMessage gcmMessage = message.gcmMessage(gcmSender);
 				gcmSender.send(gcmMessage, gcmToken);
 			}
 		}
@@ -40,7 +41,7 @@ public class Dispatcher {
 		}
 		if (gcmSender != null) {
 			for (String gcmToken : receiver.getGcmTokens()) {
-				com.google.android.gcm.server.Message message = personalizedMessage.gcmMessage(gcmSender, gcmToken);
+				GcmMessage message = personalizedMessage.gcmMessage(gcmSender, gcmToken);
 				gcmSender.send(message, gcmToken);
 			}
 		}
@@ -52,7 +53,7 @@ public class Dispatcher {
 			apnsSender.bulkSend(apnsMessage, receiver.getApnsTokens());
 		}
 		if (gcmSender != null) {
-			com.google.android.gcm.server.Message gcmMessage = message.gcmMessage(gcmSender);
+			GcmMessage gcmMessage = message.gcmMessage(gcmSender);
 			gcmSender.bulkSend(gcmMessage, receiver.getGcmTokens());
 		}
 	}
