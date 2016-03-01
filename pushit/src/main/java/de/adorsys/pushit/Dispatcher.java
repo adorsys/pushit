@@ -21,13 +21,17 @@ public class Dispatcher {
 		if (apnsSender != null) {
 			for (String apnsToken : receiver.getApnsTokens()) {
 				String apnsMessage = message.apnsMessage(apnsSender);
-				apnsSender.send(apnsMessage, apnsToken);
+				if (apnsMessage != null) {
+					apnsSender.send(apnsMessage, apnsToken);
+				}
 			}
 		}
 		if (gcmSender != null) {
 			for (String gcmToken : receiver.getGcmTokens()) {
 				GcmMessage gcmMessage = message.gcmMessage(gcmSender);
-				gcmSender.send(gcmMessage, gcmToken);
+				if (gcmMessage != null) {
+					gcmSender.send(gcmMessage, gcmToken);
+				}
 			}
 		}
 	}
@@ -36,13 +40,17 @@ public class Dispatcher {
 		if (apnsSender != null) {
 			for (String apnsToken : receiver.getApnsTokens()) {
 				String apnsMessage = personalizedMessage.apnsMessage(apnsSender, apnsToken);
-				apnsSender.send(apnsMessage, apnsToken);
+				if (apnsMessage != null) {
+					apnsSender.send(apnsMessage, apnsToken);
+				}
 			}
 		}
 		if (gcmSender != null) {
 			for (String gcmToken : receiver.getGcmTokens()) {
-				GcmMessage message = personalizedMessage.gcmMessage(gcmSender, gcmToken);
-				gcmSender.send(message, gcmToken);
+				GcmMessage gcmMessage = personalizedMessage.gcmMessage(gcmSender, gcmToken);
+				if (gcmMessage != null) {
+					gcmSender.send(gcmMessage, gcmToken);
+				}
 			}
 		}
 	}
@@ -50,11 +58,15 @@ public class Dispatcher {
 	public void bulkSend(Message message, Receiver receiver) {
 		if (apnsSender != null) {
 			String apnsMessage = message.apnsMessage(apnsSender);
-			apnsSender.bulkSend(apnsMessage, receiver.getApnsTokens());
+			if (apnsMessage != null) {
+				apnsSender.bulkSend(apnsMessage, receiver.getApnsTokens());
+			}
 		}
 		if (gcmSender != null) {
 			GcmMessage gcmMessage = message.gcmMessage(gcmSender);
-			gcmSender.bulkSend(gcmMessage, receiver.getGcmTokens());
+			if (gcmMessage != null) {
+				gcmSender.bulkSend(gcmMessage, receiver.getGcmTokens());
+			}
 		}
 	}
 
