@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * @author Christoph Dietze
@@ -17,7 +18,8 @@ public class ApnsSender {
 
 	public ApnsSender(String keyFilename, String keyPassphrase) {
 		try {
-			apnsService = APNS.newService().withCert(keyFilename, keyPassphrase).withProductionDestination().build();
+			apnsService = APNS.newService().withCert(Objects.requireNonNull(keyFilename), Objects.requireNonNull(keyPassphrase))
+					.withProductionDestination().build();
 		} catch (NoClassDefFoundError e) {
 			throw new RuntimeException(
 					"Classes required by APNs implementation of pushit not found, did you include the required dependency?", e);

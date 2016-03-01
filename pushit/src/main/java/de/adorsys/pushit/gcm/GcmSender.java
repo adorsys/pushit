@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * @author Christoph Dietze
@@ -20,7 +21,7 @@ public class GcmSender {
 	private final Sender sender;
 
 	public GcmSender(String apiKey) {
-		this.apiKey = apiKey;
+		this.apiKey = Objects.requireNonNull(apiKey);
 		try {
 			sender = new Sender(apiKey);
 		} catch (NoClassDefFoundError e) {
@@ -35,6 +36,8 @@ public class GcmSender {
 	}
 
 	public void send(GcmMessage message, String gcmToken) {
+		Objects.requireNonNull(message);
+		Objects.requireNonNull(gcmToken);
 		try {
 			log.debug("Sending: {} to {}", message, gcmToken);
 			Result result = sender.sendNoRetry(message.gcmMessage(), gcmToken);
@@ -45,6 +48,8 @@ public class GcmSender {
 	}
 
 	public void bulkSend(GcmMessage message, Collection<String> gcmTokens) {
+		Objects.requireNonNull(message);
+		Objects.requireNonNull(gcmTokens);
 		try {
 			log.debug("Sending: {} to {}", message, gcmTokens);
 			MulticastResult result = sender.sendNoRetry(message.gcmMessage(), new ArrayList<>(gcmTokens));

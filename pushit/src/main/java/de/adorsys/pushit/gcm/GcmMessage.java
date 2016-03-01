@@ -2,6 +2,8 @@ package de.adorsys.pushit.gcm;
 
 import com.google.android.gcm.server.Message;
 
+import java.util.Objects;
+
 /**
  * Wrapper class around {@link Message}
  * <p/>
@@ -16,7 +18,7 @@ public interface GcmMessage {
 		private final Message message;
 
 		public Basic(Message message) {
-			this.message = message;
+			this.message = Objects.requireNonNull(message);
 		}
 
 		@Override

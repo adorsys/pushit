@@ -4,12 +4,15 @@ import de.adorsys.pushit.apns.ApnsSender;
 import de.adorsys.pushit.gcm.GcmMessage;
 import de.adorsys.pushit.gcm.GcmSender;
 
+import java.util.Objects;
+
 /**
  * @author Christoph Dietze
  */
 public class Dispatcher {
-
+	/** may be null */
 	private final ApnsSender apnsSender;
+	/** may be null */
 	private final GcmSender gcmSender;
 
 	private Dispatcher(Builder builder) {
@@ -18,6 +21,8 @@ public class Dispatcher {
 	}
 
 	public void send(Message message, Receiver receiver) {
+		Objects.requireNonNull(message);
+		Objects.requireNonNull(receiver);
 		if (apnsSender != null) {
 			for (String apnsToken : receiver.getApnsTokens()) {
 				String apnsMessage = message.apnsMessage(apnsSender);
@@ -37,6 +42,8 @@ public class Dispatcher {
 	}
 
 	public void send(PersonalizedMessage personalizedMessage, Receiver receiver) {
+		Objects.requireNonNull(personalizedMessage);
+		Objects.requireNonNull(receiver);
 		if (apnsSender != null) {
 			for (String apnsToken : receiver.getApnsTokens()) {
 				String apnsMessage = personalizedMessage.apnsMessage(apnsSender, apnsToken);
@@ -56,6 +63,8 @@ public class Dispatcher {
 	}
 
 	public void bulkSend(Message message, Receiver receiver) {
+		Objects.requireNonNull(message);
+		Objects.requireNonNull(receiver);
 		if (apnsSender != null) {
 			String apnsMessage = message.apnsMessage(apnsSender);
 			if (apnsMessage != null) {
