@@ -3,7 +3,8 @@ package de.adorsys.pushit.sample_apns_only;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import de.adorsys.pushit.Dispatcher;
-import de.adorsys.pushit.PersonalizedMessageBuilder;
+import de.adorsys.pushit.Message;
+import de.adorsys.pushit.PersonalizedMessage;
 import de.adorsys.pushit.Receiver;
 import de.adorsys.pushit.apns.ApnsSender;
 
@@ -23,10 +24,10 @@ public class Main {
 		ApnsSender apnsSender = new ApnsSender(keyFilename, keyPassphrase);
 		Dispatcher dispatcher = new Dispatcher.Builder().apnsSender(apnsSender).build();
 
-		PersonalizedMessageBuilder.SimpleText messageBuilder = new PersonalizedMessageBuilder.SimpleText("Hi from pushit");
+		Message.TextMessage message = new Message.TextMessage("Hi from pushit");
 
 		Receiver receiver = new Receiver.Builder().addApnsToken(deviceToken).build();
-		dispatcher.send(messageBuilder, receiver);
+		dispatcher.send(message, receiver);
 		System.out.println("Done");
 	}
 }

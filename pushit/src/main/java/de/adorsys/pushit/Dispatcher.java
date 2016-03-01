@@ -16,44 +16,44 @@ public class Dispatcher {
 		this.gcmSender = builder.gcmSender;
 	}
 
-	public void send(MessageBuilder messageBuilder, Receiver receiver) {
+	public void send(Message message, Receiver receiver) {
 		if (apnsSender != null) {
 			for (String apnsToken : receiver.getApnsTokens()) {
-				String apnsMessage = messageBuilder.buildApnsMessage(apnsSender);
+				String apnsMessage = message.apnsMessage(apnsSender);
 				apnsSender.send(apnsMessage, apnsToken);
 			}
 		}
 		if (gcmSender != null) {
 			for (String gcmToken : receiver.getGcmTokens()) {
-				com.google.android.gcm.server.Message message = messageBuilder.buildGcmMessage(gcmSender);
-				gcmSender.send(message, gcmToken);
+				com.google.android.gcm.server.Message gcmMessage = message.gcmMessage(gcmSender);
+				gcmSender.send(gcmMessage, gcmToken);
 			}
 		}
 	}
 
-	public void send(PersonalizedMessageBuilder personalizedMessageBuilder, Receiver receiver) {
+	public void send(PersonalizedMessage personalizedMessage, Receiver receiver) {
 		if (apnsSender != null) {
 			for (String apnsToken : receiver.getApnsTokens()) {
-				String apnsMessage = personalizedMessageBuilder.buildApnsMessage(apnsSender, apnsToken);
+				String apnsMessage = personalizedMessage.apnsMessage(apnsSender, apnsToken);
 				apnsSender.send(apnsMessage, apnsToken);
 			}
 		}
 		if (gcmSender != null) {
 			for (String gcmToken : receiver.getGcmTokens()) {
-				com.google.android.gcm.server.Message message = personalizedMessageBuilder.buildGcmMessage(gcmSender, gcmToken);
+				com.google.android.gcm.server.Message message = personalizedMessage.gcmMessage(gcmSender, gcmToken);
 				gcmSender.send(message, gcmToken);
 			}
 		}
 	}
 
-	public void bulkSend(MessageBuilder messageBuilder, Receiver receiver) {
+	public void bulkSend(Message message, Receiver receiver) {
 		if (apnsSender != null) {
-			String apnsMessage = messageBuilder.buildApnsMessage(apnsSender);
+			String apnsMessage = message.apnsMessage(apnsSender);
 			apnsSender.bulkSend(apnsMessage, receiver.getApnsTokens());
 		}
 		if (gcmSender != null) {
-			com.google.android.gcm.server.Message message = messageBuilder.buildGcmMessage(gcmSender);
-			gcmSender.bulkSend(message, receiver.getGcmTokens());
+			com.google.android.gcm.server.Message gcmMessage = message.gcmMessage(gcmSender);
+			gcmSender.bulkSend(gcmMessage, receiver.getGcmTokens());
 		}
 	}
 
