@@ -5,34 +5,29 @@ import com.google.android.gcm.server.Message;
 import java.util.Objects;
 
 /**
- * Wrapper class around {@link Message}
+ * Wrapper class around {@link Message}.
  * <p/>
- * This is neccessary to avoid NoClassDefFoundErrors when using pushit without GCM.
+ * The wrapping is neccessary to avoid NoClassDefFoundErrors when using pushit without GCM.
  *
  * @author Christoph Dietze
  */
-public interface GcmMessage {
-	Message gcmMessage();
+public class GcmMessage {
+    private final Message message;
 
-	class Basic implements GcmMessage {
-		private final Message message;
+    public GcmMessage(Message message) {
+        this.message = Objects.requireNonNull(message);
+    }
 
-		public Basic(Message message) {
-			this.message = Objects.requireNonNull(message);
-		}
+    public Message gcmMessage() {
+        return message;
+    }
 
-		@Override
-		public Message gcmMessage() {
-			return message;
-		}
-
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder(this.getClass().getSimpleName());
-			sb.append("{");
-			sb.append("message=").append(message);
-			sb.append("}");
-			return sb.toString();
-		}
-	}
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(this.getClass().getSimpleName());
+        sb.append("{");
+        sb.append("message=").append(message);
+        sb.append("}");
+        return sb.toString();
+    }
 }

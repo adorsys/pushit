@@ -14,72 +14,72 @@ import de.adorsys.pushit.gcm.GcmSender;
  */
 public interface Message {
 
-	/**
-	 * @return the message to be sent via APNs or null if not supported.
-	 */
-	String apnsMessage(ApnsSender sender);
+    /**
+     * @return the message to be sent via APNs or null if not supported.
+     */
+    String apnsMessage(ApnsSender sender);
 
-	/**
-	 * @return the message to be sent via GCM or null if not supported.
-	 */
-	GcmMessage gcmMessage(GcmSender sender);
+    /**
+     * @return the message to be sent via GCM or null if not supported.
+     */
+    GcmMessage gcmMessage(GcmSender sender);
 
-	class TextMessage implements Message {
+    class TextMessage implements Message {
 
-		private final String text;
+        private final String text;
 
-		public TextMessage(String text) {
-			this.text = text;
-		}
+        public TextMessage(String text) {
+            this.text = text;
+        }
 
-		@Override
-		public String apnsMessage(ApnsSender sender) {
-			return APNS.newPayload().alertBody(text).build();
-		}
+        @Override
+        public String apnsMessage(ApnsSender sender) {
+            return APNS.newPayload().alertBody(text).build();
+        }
 
-		@Override
-		public GcmMessage gcmMessage(GcmSender sender) {
-			return new GcmMessage.Basic(new com.google.android.gcm.server.Message.Builder().addData("message", text).build());
-		}
+        @Override
+        public GcmMessage gcmMessage(GcmSender sender) {
+            return new GcmMessage(new com.google.android.gcm.server.Message.Builder().addData("message", text).build());
+        }
 
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder(this.getClass().getSimpleName());
-			sb.append("{");
-			sb.append("text=").append(text);
-			sb.append("}");
-			return sb.toString();
-		}
-	}
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder(this.getClass().getSimpleName());
+            sb.append("{");
+            sb.append("text=").append(text);
+            sb.append("}");
+            return sb.toString();
+        }
+    }
 
-	class BasicMessage implements Message {
+    class BasicMessage implements Message {
 
-		private final String apnsMessage;
-		private final GcmMessage gcmMessage;
+        private final String apnsMessage;
+        private final GcmMessage gcmMessage;
 
-		public BasicMessage(String apnsMessage, GcmMessage gcmMessage) {
-			this.apnsMessage = apnsMessage;
-			this.gcmMessage = gcmMessage;
-		}
+        public BasicMessage(String apnsMessage, GcmMessage gcmMessage) {
+            this.apnsMessage = apnsMessage;
+            this.gcmMessage = gcmMessage;
+        }
 
-		@Override
-		public String apnsMessage(ApnsSender sender) {
-			return apnsMessage;
-		}
+        @Override
+        public String apnsMessage(ApnsSender sender) {
+            return apnsMessage;
+        }
 
-		@Override
-		public GcmMessage gcmMessage(GcmSender sender) {
-			return gcmMessage;
-		}
+        @Override
+        public GcmMessage gcmMessage(GcmSender sender) {
+            return gcmMessage;
+        }
 
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder(this.getClass().getSimpleName());
-			sb.append("{");
-			sb.append("apnsMessage=").append(apnsMessage);
-			sb.append(", gcmMessage=").append(gcmMessage);
-			sb.append("}");
-			return sb.toString();
-		}
-	}
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder(this.getClass().getSimpleName());
+            sb.append("{");
+            sb.append("apnsMessage=").append(apnsMessage);
+            sb.append(", gcmMessage=").append(gcmMessage);
+            sb.append("}");
+            return sb.toString();
+        }
+    }
 }

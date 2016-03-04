@@ -13,20 +13,20 @@ import de.adorsys.pushit.gcm.GcmSender;
  */
 public class Main {
 
-	private static final Config conf = ConfigFactory.load();
-	private static String apiKey = conf.getString("gcm.apiKey");
-	private static String registrationId = conf.getString("gcm.registrationId");
+    private static final Config conf = ConfigFactory.load();
+    private static String apiKey = conf.getString("gcm.apiKey");
+    private static String registrationId = conf.getString("gcm.registrationId");
 
-	public static void main(String[] args) throws InterruptedException {
-		System.out.println("Hello");
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println("Hello");
 
-		GcmSender gcmSender = new GcmSender(apiKey);
-		Dispatcher dispatcher = new Dispatcher.Builder().gcmSender(gcmSender).build();
+        GcmSender gcmSender = GcmSender.create(apiKey);
+        Dispatcher dispatcher = new Dispatcher.Builder().gcmSender(gcmSender).build();
 
-		Message.TextMessage message = new Message.TextMessage("Hi from pushit");
+        Message.TextMessage message = new Message.TextMessage("Hi from pushit");
 
-		Receiver receiver = new Receiver.Builder().addGcmToken(registrationId).build();
-		dispatcher.send(message, receiver);
-		System.out.println("Done");
-	}
+        Receiver receiver = new Receiver.Builder().addGcmToken(registrationId).build();
+        dispatcher.send(message, receiver);
+        System.out.println("Done");
+    }
 }

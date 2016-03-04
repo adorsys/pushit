@@ -2,6 +2,8 @@ package de.adorsys.pushit;
 
 import de.adorsys.pushit.apns.ApnsSender;
 import de.adorsys.pushit.gcm.GcmMessage;
+import de.adorsys.pushit.gcm.GcmResponse;
+import de.adorsys.pushit.gcm.GcmResponseHandler;
 import de.adorsys.pushit.gcm.GcmSender;
 
 import java.util.Objects;
@@ -14,10 +16,17 @@ public class Dispatcher {
 	private final ApnsSender apnsSender;
 	/** may be null */
 	private final GcmSender gcmSender;
+	/** may be null */
+	private GcmResponseHandler gcmResponseHandler;
 
 	private Dispatcher(Builder builder) {
 		this.apnsSender = builder.apnsSender;
 		this.gcmSender = builder.gcmSender;
+	}
+
+	public Dispatcher setGcmResponseHandler(GcmResponseHandler gcmResponseHandler) {
+		this.gcmResponseHandler = gcmResponseHandler;
+		return this;
 	}
 
 	public void send(Message message, Receiver receiver) {
@@ -35,7 +44,7 @@ public class Dispatcher {
 			for (String gcmToken : receiver.getGcmTokens()) {
 				GcmMessage gcmMessage = message.gcmMessage(gcmSender);
 				if (gcmMessage != null) {
-					gcmSender.send(gcmMessage, gcmToken);
+					gcmSender.send(gcmMessage, gcmToken, gcmResponseHandler);
 				}
 			}
 		}
@@ -56,7 +65,7 @@ public class Dispatcher {
 			for (String gcmToken : receiver.getGcmTokens()) {
 				GcmMessage gcmMessage = personalizedMessage.gcmMessage(gcmSender, gcmToken);
 				if (gcmMessage != null) {
-					gcmSender.send(gcmMessage, gcmToken);
+					gcmSender.send(gcmMessage, gcmToken, gcmResponseHandler);
 				}
 			}
 		}
@@ -74,7 +83,7 @@ public class Dispatcher {
 		if (gcmSender != null) {
 			GcmMessage gcmMessage = message.gcmMessage(gcmSender);
 			if (gcmMessage != null) {
-				gcmSender.bulkSend(gcmMessage, receiver.getGcmTokens());
+				gcmSender.bulkSend(gcmMessage, receiver.getGcmTokens(), gcmResponseHandler);
 			}
 		}
 	}

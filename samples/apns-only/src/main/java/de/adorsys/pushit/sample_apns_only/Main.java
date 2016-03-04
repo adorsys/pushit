@@ -21,7 +21,7 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		System.out.println("Hello");
 
-		ApnsSender apnsSender = new ApnsSender(keyFilename, keyPassphrase);
+		ApnsSender apnsSender = ApnsSender.create(keyFilename, keyPassphrase);
 		Dispatcher dispatcher = new Dispatcher.Builder().apnsSender(apnsSender).build();
 
 		Message.TextMessage message = new Message.TextMessage("Hi from pushit");
