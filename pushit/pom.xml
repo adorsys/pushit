@@ -71,17 +71,16 @@
         </configuration>
       </plugin>
 
+      <!-- build a -sources.jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>2.4</version>
-        <!-- build a -sources.jar -->
+        <version>3.0.0</version>
         <executions>
           <execution>
             <id>attach-sources</id>
-            <phase>generate-resources</phase>
             <goals>
-              <goal>jar-no-fork</goal>
+              <goal>jar</goal>
             </goals>
           </execution>
         </executions>
