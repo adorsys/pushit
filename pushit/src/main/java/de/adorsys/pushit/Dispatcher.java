@@ -16,17 +16,10 @@ public class Dispatcher {
 	private final ApnsSender apnsSender;
 	/** may be null */
 	private final GcmSender gcmSender;
-	/** may be null */
-	private GcmResponseHandler gcmResponseHandler;
 
 	private Dispatcher(Builder builder) {
 		this.apnsSender = builder.apnsSender;
 		this.gcmSender = builder.gcmSender;
-	}
-
-	public Dispatcher setGcmResponseHandler(GcmResponseHandler gcmResponseHandler) {
-		this.gcmResponseHandler = gcmResponseHandler;
-		return this;
 	}
 
 	public void send(Message message, Receiver receiver) {
@@ -44,7 +37,7 @@ public class Dispatcher {
 			for (String gcmToken : receiver.getGcmTokens()) {
 				GcmMessage gcmMessage = message.gcmMessage(gcmSender);
 				if (gcmMessage != null) {
-					gcmSender.send(gcmMessage, gcmToken, gcmResponseHandler);
+					gcmSender.send(gcmMessage, gcmToken);
 				}
 			}
 		}
@@ -65,7 +58,7 @@ public class Dispatcher {
 			for (String gcmToken : receiver.getGcmTokens()) {
 				GcmMessage gcmMessage = personalizedMessage.gcmMessage(gcmSender, gcmToken);
 				if (gcmMessage != null) {
-					gcmSender.send(gcmMessage, gcmToken, gcmResponseHandler);
+					gcmSender.send(gcmMessage, gcmToken);
 				}
 			}
 		}
@@ -83,7 +76,7 @@ public class Dispatcher {
 		if (gcmSender != null) {
 			GcmMessage gcmMessage = message.gcmMessage(gcmSender);
 			if (gcmMessage != null) {
-				gcmSender.bulkSend(gcmMessage, receiver.getGcmTokens(), gcmResponseHandler);
+				gcmSender.bulkSend(gcmMessage, receiver.getGcmTokens());
 			}
 		}
 	}
