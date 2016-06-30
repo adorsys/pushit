@@ -26,8 +26,8 @@ import java.util.Objects;
  * Wrapper class around {@link MulticastResult}.
  *
  * @author Christoph Dietze
- * @see <a href="https://developers.google.com/cloud-messaging/http#response">Google's documentation for the response format</a>
- * @see {@link GcmResponse}
+ * see &lt;a href="https://developers.google.com/cloud-messaging/http#response"&gt;Google's documentation for the response format&lt;/a&gt;
+ * @see GcmResponse
  */
 public class GcmMultiResponse {
 	private final Message message;

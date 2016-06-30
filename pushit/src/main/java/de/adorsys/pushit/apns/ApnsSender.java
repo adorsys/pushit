@@ -25,7 +25,6 @@ import java.util.Objects;
 
 /**
  * Wrapper class around {@link ApnsService}.
- * <p/>
  * The wrapping is neccessary to avoid NoClassDefFoundErrors when using pushit without APNs.
  *
  * @author Christoph Dietze

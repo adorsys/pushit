@@ -22,7 +22,6 @@ import de.adorsys.pushit.gcm.GcmSender;
 
 /**
  * Interface for push messages.
- * <p/>
  * In contrast to {@link Message} you do not have the personal deviceToken available when building the message.
  *
  * @author Christoph Dietze
@@ -30,11 +29,13 @@ import de.adorsys.pushit.gcm.GcmSender;
 public interface Message {
 
     /**
+     * @param sender sender
      * @return the message to be sent via APNs or null if not supported.
      */
     String apnsMessage(ApnsSender sender);
 
     /**
+     * @param sender sender
      * @return the message to be sent via GCM or null if not supported.
      */
     GcmMessage gcmMessage(GcmSender sender);

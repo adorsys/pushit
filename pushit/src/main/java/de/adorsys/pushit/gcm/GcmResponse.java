@@ -22,12 +22,11 @@ import java.util.Objects;
 
 /**
  * Wrapper class around {@link Result}.
- * <p/>
  * Also contains additional related data, i.e. the gcmToken and the {@link Message}.
  *
  * @author Christoph Dietze
- * @see <a href="https://developers.google.com/cloud-messaging/http#response">Google's documentation for the response format</a>
- * @see {@link GcmMultiResponse}
+ * see &lt;a href="https://developers.google.com/cloud-messaging/http#response"&gt;Google's documentation for the response format&lt;/a&gt;
+ * @see GcmMultiResponse
  */
 public class GcmResponse {
 	private final Message message;

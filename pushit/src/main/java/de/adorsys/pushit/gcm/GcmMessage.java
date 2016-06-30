@@ -21,7 +21,6 @@ import java.util.Objects;
 
 /**
  * Wrapper class around {@link Message}.
- * <p/>
  * The wrapping is neccessary to avoid NoClassDefFoundErrors when using pushit without GCM.
  *
  * @author Christoph Dietze
