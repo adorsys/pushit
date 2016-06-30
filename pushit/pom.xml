@@ -22,7 +22,7 @@
   <parent>
     <groupId>de.adorsys.pushit</groupId>
     <artifactId>parent</artifactId>
-    <version>0.4.0-SNAPSHOT</version>
+    <version>0.3.2</version>
   </parent>
 
   <artifactId>pushit</artifactId>
